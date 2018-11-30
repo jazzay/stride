@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -57,14 +58,14 @@
     <PackageReference Include="System.ValueTuple" Version="4.4.0" />
   </ItemGroup>
   
-  <!-- <ItemGroup>
+  <ItemGroup>
     <Compile Include="..\..\shared\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <None Include="build\**\*.targets" PackagePath="build\" Pack="true" />
+    <!-- <None Include="build\**\*.targets" PackagePath="build\" Pack="true" />
     <None Include="build\**\*.props" PackagePath="build\" Pack="true" />
-    <None Include="..\..\..\deps\AssemblyProcessor\*.*" PackagePath="tools\AssemblyProcessor\" Pack="true" />
-  </ItemGroup> -->
+    <None Include="..\..\..\deps\AssemblyProcessor\*.*" PackagePath="tools\AssemblyProcessor\" Pack="true" /> -->
+  </ItemGroup>
   
   <!-- What to do about TT? -->
   <!-- <ItemGroup>
