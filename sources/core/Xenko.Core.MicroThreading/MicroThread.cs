@@ -17,7 +17,8 @@ namespace Xenko.Core.MicroThreading
     /// </summary>
     public class MicroThread
     {
-        internal ProfilingKey ProfilingKey;
+        // not used
+        internal ProfilingKey ProfilingKey = null;
 
         /// <summary>
         /// Gets the attached properties to this component.

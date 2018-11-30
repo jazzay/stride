@@ -41,43 +41,45 @@ namespace Xenko.Core
     /// </summary>
     public static class Utilities
     {
-#if XENKO_PLATFORM_UWP
+//#if XENKO_PLATFORM_UWP
         public static unsafe void CopyMemory(IntPtr dest, IntPtr src, int sizeInBytesToCopy)
         {
-            Interop.memcpy((void*)dest, (void*)src, sizeInBytesToCopy);
+            // this is xplat, but is it suitable replacement?
+            Buffer.MemoryCopy(src.ToPointer(), dest.ToPointer(), sizeInBytesToCopy, sizeInBytesToCopy);
+            //Interop.memcpy((void*)dest, (void*)src, sizeInBytesToCopy);
         }
-#else
-#if XENKO_PLATFORM_WINDOWS_DESKTOP
-        private const string MemcpyDll = "msvcrt.dll";
-#elif XENKO_PLATFORM_ANDROID
-        private const string MemcpyDll = "libc.so";
-#elif XENKO_PLATFORM_UNIX
-        // We do not specifiy the .so extension as libc.so on Linux
-        // is actually not a .so files but a script. Using just libc
-        // will automatically find the corresponding .so.
-        private const string MemcpyDll = "libc";
-#elif XENKO_PLATFORM_IOS
-        private const string MemcpyDll = ObjCRuntime.Constants.SystemLibrary;
-#else
-#   error Unsupported platform
-#endif
-        [DllImport(MemcpyDll, EntryPoint = "memcpy", CallingConvention = CallingConvention.Cdecl, SetLastError = false)]
-#if !XENKO_RUNTIME_CORECLR
-        [SuppressUnmanagedCodeSecurity]
-#endif
-        private static extern IntPtr CopyMemory(IntPtr dest, IntPtr src, ulong sizeInBytesToCopy);
+// #else
+// #if XENKO_PLATFORM_WINDOWS_DESKTOP
+//         private const string MemcpyDll = "msvcrt.dll";
+// #elif XENKO_PLATFORM_ANDROID
+//         private const string MemcpyDll = "libc.so";
+// #elif XENKO_PLATFORM_UNIX
+//         // We do not specifiy the .so extension as libc.so on Linux
+//         // is actually not a .so files but a script. Using just libc
+//         // will automatically find the corresponding .so.
+//         private const string MemcpyDll = "libc";
+// #elif XENKO_PLATFORM_IOS
+//         private const string MemcpyDll = ObjCRuntime.Constants.SystemLibrary;
+// #else
+// #   error Unsupported platform
+// #endif
+//         [DllImport(MemcpyDll, EntryPoint = "memcpy", CallingConvention = CallingConvention.Cdecl, SetLastError = false)]
+// #if !XENKO_RUNTIME_CORECLR
+//         [SuppressUnmanagedCodeSecurity]
+// #endif
+//         private static extern IntPtr CopyMemory(IntPtr dest, IntPtr src, ulong sizeInBytesToCopy);
 
-        /// <summary>
-        /// Copy memory.
-        /// </summary>
-        /// <param name="dest">The destination memory location</param>
-        /// <param name="src">The source memory location.</param>
-        /// <param name="sizeInBytesToCopy">The count.</param>
-        public static void CopyMemory(IntPtr dest, IntPtr src, int sizeInBytesToCopy)
-        {
-            CopyMemory(dest, src, (ulong)sizeInBytesToCopy);
-        }
-#endif
+//         /// <summary>
+//         /// Copy memory.
+//         /// </summary>
+//         /// <param name="dest">The destination memory location</param>
+//         /// <param name="src">The source memory location.</param>
+//         /// <param name="sizeInBytesToCopy">The count.</param>
+//         public static void CopyMemory(IntPtr dest, IntPtr src, int sizeInBytesToCopy)
+//         {
+//             CopyMemory(dest, src, (ulong)sizeInBytesToCopy);
+//         }
+// #endif
 
         /// <summary>
         /// Compares two block of memory.

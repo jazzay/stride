@@ -683,9 +683,11 @@ namespace Xenko.Core.Threading
 
         private class DispatcherNode
         {
+#if false
             public MethodBase Caller;
             public int Count;
             public TimeSpan TotalTime;
+#endif
         }
 
         private static ConcurrentDictionary<MethodInfo, DispatcherNode> nodes = new ConcurrentDictionary<MethodInfo, DispatcherNode>();

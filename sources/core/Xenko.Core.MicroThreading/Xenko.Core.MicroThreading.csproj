@@ -1,20 +1,28 @@
-﻿<Project>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
   <PropertyGroup>
     <XenkoAssemblySign>true</XenkoAssemblySign>
     <XenkoRuntime>true</XenkoRuntime>
   </PropertyGroup>
-  <Import Project="..\..\targets\Xenko.Core.PreSettings.targets" />
-  <Import Project="Sdk.props" Sdk="MSBuild.Sdk.Extras" Version="1.6.55" />
+
+  <!-- <Import Project="..\..\targets\Xenko.Core.PreSettings.targets" />
+  <Import Project="Sdk.props" Sdk="MSBuild.Sdk.Extras" Version="1.6.55" /> -->
+
   <PropertyGroup>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
+    <!-- <ProductVersion>8.0.30703</ProductVersion> -->
+    <!-- <SchemaVersion>2.0</SchemaVersion> -->
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <XenkoBuildTags>*</XenkoBuildTags>
-    <XenkoAssemblyProcessor>true</XenkoAssemblyProcessor>
+    <!-- <XenkoBuildTags>*</XenkoBuildTags> -->
+    <!-- <XenkoAssemblyProcessor>true</XenkoAssemblyProcessor> -->
     <XenkoAssemblyProcessorOptions>--auto-module-initializer</XenkoAssemblyProcessorOptions>
-    <XenkoCodeAnalysis>true</XenkoCodeAnalysis>
+    <!-- <XenkoCodeAnalysis>true</XenkoCodeAnalysis> -->
   </PropertyGroup>
-  <Choose>
+
+  <!-- <Choose>
     <When Condition=" '$(AutoIncludeSystemAssembly)' != 'true'">
     </When>
   </Choose>
@@ -22,10 +30,14 @@
     <Compile Include="..\..\shared\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-  </ItemGroup>
+  </ItemGroup> -->
+
   <ItemGroup>
     <ProjectReference Include="..\Xenko.Core\Xenko.Core.csproj" />
   </ItemGroup>
-  <Import Project="$(XenkoPostSettingsTargets)" />
-  <Import Project="Sdk.targets" Sdk="MSBuild.Sdk.Extras" Version="1.6.55" />
+  
+  <!-- <Import Project="$(XenkoPostSettingsTargets)" />
+  <Import Project="Sdk.targets" Sdk="MSBuild.Sdk.Extras" Version="1.6.55" /> -->
+
+
 </Project>
