@@ -1,4 +1,4 @@
-<Project InitialTargets="XenkoCheckRequirements;_XenkoCheckVisualCRuntime2015" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project InitialTargets="XenkoCheckRequirements" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--Check requirements when running this build file -->
   <Target Name="XenkoCheckRequirements">
     <Error Condition="'$(XenkoPlatform)' == ''" Text="The property %24(XenkoPlatform) must be defined by the project"/>
@@ -12,8 +12,10 @@
       <Output TaskParameter="TargetOutputs" PropertyName="CurrentSolutionConfigurationContents"/>
     </MSBuild>
   </Target>
+
+  <!-- Jazzay - This does not work on machine with 2017 installed?? -->
   <!-- Check if Visual C++ Runtime 2015 is properly installed -->
-  <Target Name="_XenkoCheckVisualCRuntime2015">
+  <!-- <Target Name="_XenkoCheckVisualCRuntime2015">
     <ItemGroup>
       <_XenkoVisualCRuntime2015 Include="Visual C++ Redistributable for Visual Studio 2015 x86">
         <Version>$([MSBuild]::GetRegistryValueFromView('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\DevDiv\VC\Servicing\14.0\RuntimeMinimum', 'Version', null, RegistryView.Registry32))</Version>
@@ -30,7 +32,7 @@
     </ItemGroup>
 
     <Error Condition="'@(_XenkoVisualCRuntime2015NotInstalled)' != ''" Text="@(_XenkoVisualCRuntime2015NotInstalled->'%(Identity) is not installed. Please download from %(DownloadUrl)', '%0a')"/>
-  </Target>
+  </Target> -->
   
   <!-- 
   *****************************************************************************************************************************

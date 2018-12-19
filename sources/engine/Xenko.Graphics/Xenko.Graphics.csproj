@@ -1,4 +1,4 @@
-<Project>
+﻿<Project>
   <PropertyGroup>
     <XenkoAssemblySign>true</XenkoAssemblySign>
     <XenkoRuntime>true</XenkoRuntime>
@@ -192,10 +192,11 @@
     <ProjectReference Include="..\Xenko.Shaders\Xenko.Shaders.csproj" />
     <ProjectReference Include="..\Xenko\Xenko.csproj" />
     <PackageReference Include="Microsoft.NETCore.Platforms" Version="2.1.1" />
-    <PackageReference Include="SharpDX.Direct3D11" Version="4.0.1" Condition="'$(TargetFramework)' == 'net45' Or $(TargetFramework.StartsWith('uap10.0'))" />
-    <PackageReference Include="SharpDX.Direct3D12" Version="4.0.1" Condition="'$(TargetFramework)' == 'net45'" />
-    <PackageReference Include="SharpDX.D3DCompiler" Version="4.0.1" Condition="'$(TargetFramework)' == 'net45' Or $(TargetFramework.StartsWith('uap10.0'))" />
-    <PackageReference Include="Xenko.OpenTK" Version="1.0.1" Condition="'$(TargetFramework)' == 'net45' Or '$(TargetFramework)' == 'xamarinios10' Or '$(TargetFramework)' == 'monoandroid50' Or '$(TargetFramework)' == 'netstandard2.0'" />
+    <!-- Not sure the best way to condition these but we cannot use Target Framework -->
+    <PackageReference Include="SharpDX.Direct3D11" Version="4.0.1" Condition=" '$(XenkoGraphicsApi)' == 'Direct3D11' " />
+    <PackageReference Include="SharpDX.Direct3D12" Version="4.0.1" Condition=" '$(XenkoGraphicsApi)' == 'Direct3D12' " />
+    <PackageReference Include="SharpDX.D3DCompiler" Version="4.0.1" Condition=" '$(XenkoGraphicsApi)' == 'Direct3D11' " />
+    <PackageReference Include="Xenko.OpenTK" Version="1.0.0" Condition="'$(TargetFramework)' == 'net45' Or '$(TargetFramework)' == 'xamarinios10' Or '$(TargetFramework)' == 'monoandroid50' Or '$(TargetFramework)' == 'netstandard2.0'" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

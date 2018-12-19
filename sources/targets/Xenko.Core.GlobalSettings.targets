@@ -127,7 +127,7 @@
     Settings XenkoNETRuntime specific
   -->
   <PropertyGroup Condition=" '$(XenkoNETRuntime)' == 'CoreCLR' ">
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup>

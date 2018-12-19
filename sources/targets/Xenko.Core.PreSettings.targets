@@ -25,7 +25,9 @@
     <!-- Let's support escaped MSBuild variables, in case it was sent from Xenko.build (not sure why but I couldn't make it work properly when passing to MSBuild.Properties) -->
     <XenkoPlatforms>$([MSBuild]::Unescape('$(XenkoPlatforms)'))</XenkoPlatforms>
     <_XenkoPlatforms>;$(XenkoPlatforms);</_XenkoPlatforms>
-    <XenkoRuntimeTargetFrameworks Condition="$(_XenkoPlatforms.Contains(';Windows;'))">$(XenkoRuntimeTargetFrameworks);net45</XenkoRuntimeTargetFrameworks>
+    <!-- Multi-targetting is not fully working :( -->
+    <!-- <XenkoRuntimeTargetFrameworks Condition="$(_XenkoPlatforms.Contains(';Windows;'))">$(XenkoRuntimeTargetFrameworks);net45;netstandard2.0</XenkoRuntimeTargetFrameworks> -->
+    <XenkoRuntimeTargetFrameworks Condition="$(_XenkoPlatforms.Contains(';Windows;'))">$(XenkoRuntimeTargetFrameworks);netstandard2.0</XenkoRuntimeTargetFrameworks>
     <XenkoRuntimeTargetFrameworks Condition="$(_XenkoPlatforms.Contains(';UWP;'))">$(XenkoRuntimeTargetFrameworks);uap10.0.16299</XenkoRuntimeTargetFrameworks>
     <XenkoRuntimeTargetFrameworks Condition="$(_XenkoPlatforms.Contains(';Android;'))">$(XenkoRuntimeTargetFrameworks);monoandroid50</XenkoRuntimeTargetFrameworks>
     <XenkoRuntimeTargetFrameworks Condition="$(_XenkoPlatforms.Contains(';iOS;'))">$(XenkoRuntimeTargetFrameworks);xamarinios10</XenkoRuntimeTargetFrameworks>
@@ -58,9 +60,11 @@
 
     <!-- Default values -->
     <XenkoPlatform Condition=" '$(TargetFramework)' == 'net45' And ('$(RuntimeIdentifer)' == '' Or $(RuntimeIdentifer.StartsWith('win'))) ">Windows</XenkoPlatform>
-    <XenkoPlatform Condition=" '$(TargetFramework)' == 'netstandard2.0' ">Linux</XenkoPlatform>
-    <XenkoPlatform Condition=" '$(TargetFramework)' == 'net45' And $(RuntimeIdentifer.StartsWith('osx')) ">macOS</XenkoPlatform>
-    <XenkoPlatform Condition=" $(TargetFramework.StartsWith('uap10.0')) ">UWP</XenkoPlatform>
+    <!--WARN: This only supports Portable Linux. All the other variants may not work? -->
+    <!--Note these cause problems on Windows. Need a reliable way to detect platform that is not framework dependent!-->
+    <!--<XenkoPlatform Condition=" '$(TargetFramework)' == 'net45' And ('$(RuntimeIdentifer)' == '' Or $(RuntimeIdentifer.StartsWith('linux'))) ">Linux</XenkoPlatform>
+    <XenkoPlatform Condition=" '$(TargetFramework)' == 'net45' And ('$(RuntimeIdentifer)' == '' Or $(RuntimeIdentifer.StartsWith('osx'))) ">macOS</XenkoPlatform>-->
+    <XenkoPlatform Condition=" '$(TargetFramework)' == 'uap10.0' ">UWP</XenkoPlatform>
     <XenkoPlatform Condition=" '$(TargetFramework)' == 'monoandroid50' ">Android</XenkoPlatform>
     <XenkoPlatform Condition=" '$(TargetFramework)' == 'xamarinios10' ">iOS</XenkoPlatform>
     <!-- Default fallback -->

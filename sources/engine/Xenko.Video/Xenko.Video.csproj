@@ -1,4 +1,4 @@
-﻿<Project>
+<Project>
   <PropertyGroup>
     <XenkoAssemblySign>true</XenkoAssemblySign>
     <XenkoRuntime>true</XenkoRuntime>
@@ -17,7 +17,8 @@
   <PropertyGroup Condition="'$(XenkoPlatform)' == 'Android'">
     <DefineConstants>XENKO_VIDEO_MEDIACODEC;$(DefineConstants)</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="('$(XenkoPlatform)' == 'Windows') and ('$(XenkoNETRuntime)' != 'CoreCLR')">
+  <PropertyGroup Condition="('$(XenkoPlatform)' == 'Windows') and '$(TargetFramework)' != 'netstandard2.0' ">
+    <!--This project does not compile under NetStandard2.0 -->
     <DefineConstants>XENKO_VIDEO_FFMPEG;$(DefineConstants)</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
@@ -33,9 +34,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Xenko.Engine\Xenko.Engine.csproj" />
-    <PackageReference Include="SharpDX.MediaFoundation" Version="4.0.1" Condition="'$(TargetFramework)' == 'net45' Or $(TargetFramework.StartsWith('uap10.0'))" />
-    <PackageReference Include="SharpDX.Direct3D11" Version="4.0.1" Condition="'$(TargetFramework)' == 'net45' Or $(TargetFramework.StartsWith('uap10.0'))" />
-    <PackageReference Include="SharpDX.Direct3D12" Version="4.0.1" Condition="'$(TargetFramework)' == 'net45'" />
+    <PackageReference Include="SharpDX.MediaFoundation" Version="4.0.1" Condition="'$(XenkoPlatform)' == 'Windows' Or '$(XenkoPlatform)' == 'UWP'" />
+    <PackageReference Include="SharpDX.Direct3D11" Version="4.0.1" Condition="'$(XenkoPlatform)' == 'Windows' Or '$(XenkoPlatform)' == 'UWP'" />
+    <PackageReference Include="SharpDX.Direct3D12" Version="4.0.1" Condition="'$(XenkoPlatform)' == 'Windows'" />
   </ItemGroup>
   <Choose>
     <When Condition="$(DefineConstants.Contains(XENKO_VIDEO_FFMPEG))">

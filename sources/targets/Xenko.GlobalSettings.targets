@@ -136,7 +136,10 @@
   </PropertyGroup>
   
   <PropertyGroup>
-    <XenkoUI Condition="'$(XenkoUI)' == '' AND '$(XenkoPlatform)' == 'Windows'">SDL;WINFORMS;WPF</XenkoUI>
+    <!-- What is the best way to detect Editor/Tools vs Runtime/NetCore? -->
+    <XenkoUI Condition="'$(XenkoUI)' == '' AND '$(XenkoPlatform)' == 'Windows' AND '$(TargetFramework)' == 'net45'">SDL;WINFORMS;WPF</XenkoUI>
+    <XenkoUI Condition="'$(XenkoUI)' == '' AND '$(XenkoPlatform)' == 'Windows' AND '$(TargetFramework)' == 'netstandard2.0'">SDL</XenkoUI>
+    <!-- <XenkoUI Condition="'$(XenkoUI)' == '' AND $(RuntimeIdentifer.StartsWith('win'))">SDL</XenkoUI> -->
     <XenkoUI Condition="'$(XenkoUI)' == '' AND '$(XenkoPlatform)' == 'Linux' AND '$(XenkoGraphicsApi)' == 'Vulkan'">SDL</XenkoUI>
     <XenkoUI Condition="'$(XenkoUI)' == '' AND '$(XenkoPlatform)' == 'Linux' AND '$(XenkoGraphicsApi)' == 'OpenGL'">SDL;OPENTK</XenkoUI>
 

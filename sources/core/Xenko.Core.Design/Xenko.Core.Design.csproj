@@ -26,8 +26,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Xenko.Core.Mathematics\Xenko.Core.Mathematics.csproj" />
-    <ProjectReference Include="..\Xenko.Core.Serialization\Xenko.Core.Serialization.csproj" />
+    <ProjectReference Include="..\Xenko.Core.Mathematics\Xenko.Core.Mathematics.csproj" AdditionalProperties="TargetFramework=net45" />
+    <ProjectReference Include="..\Xenko.Core.Serialization\Xenko.Core.Serialization.csproj" AdditionalProperties="TargetFramework=net45" />
     <ProjectReference Include="..\Xenko.Core.Yaml\Xenko.Core.Yaml.csproj" />
   </ItemGroup>
   <ItemGroup>
